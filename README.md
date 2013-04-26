@@ -52,7 +52,8 @@ Implementation might look something like...
                     for (i = 0; i < output.length; i += 1) {
                         total_size += output[i].length;
                     }
-                    // them run Buffer.concat(list, total_size);
+                    // then pass new Buffer.concat(list, total_size);
+                    // to the callback
                     callback(null, new Buffer.concat(output, total_size));
                 }
             });
