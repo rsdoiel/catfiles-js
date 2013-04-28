@@ -42,7 +42,7 @@ Implementation might look something like...
             fs.readFile(filename, function (err, buf) {
                 var error_msg, i = 0, total_size = 0;
                 if (err) {
-                    error_msg = [filename, ": ", err].join(""): 
+                    error_msg = [filename, ": ", err].join(""); 
                     callback(error_msg, null);
                     return;
                 }
@@ -106,7 +106,7 @@ Implementation might look something like...
             }).on("error", function (err) {
                 var error_msg;
                 if (err) {
-                    error_msg = [href, ": ", err].join(""): 
+                    error_msg = [href, ": ", err].join(""); 
                     callback(error_msg, null);
                     return;
                 }
@@ -121,6 +121,7 @@ Implementation might look something like...
 
 ## Combining both local and remote files
 
+[catfiles.js](catfiles.js)
 ```JavaScript
     var url = require("url"),
         http = require("http"),
@@ -136,7 +137,7 @@ Implementation might look something like...
             fs.readFile(filename, function (err, buf) {
                 var error_msg, i = 0, total_size = 0;
                 if (err) {
-                    error_msg = [filename, ": ", err].join(""): 
+                    error_msg = [filename, ": ", err].join(""); 
                     callback(error_msg, null);
                     return;
                 }
@@ -181,7 +182,7 @@ Implementation might look something like...
             }).on("error", function (err) {
                 var error_msg;
                 if (err) {
-                    error_msg = [href, ": ", err].join(""): 
+                    error_msg = [href, ": ", err].join(""); 
                     callback(error_msg, null);
                     return;
                 }
