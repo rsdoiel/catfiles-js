@@ -121,9 +121,19 @@ Implementation might look something like...
 
 ## Combining both local and remote files
 
+Now let us put the pieces together and create a NodeJS/npm installable program.
+
 [catfiles.js](catfiles.js)
 ```JavaScript
-    var url = require("url"),
+    /**
+     * catfiles.js - An example NodeJS program for concatinating files.
+     * @author R. S. Doiel, <rsdoiel@gmail.com>
+     * copyright (c) 2013 all rights reserved
+     * Released under the BSD 2-clause license. See: http://opensource.org/licenses/BSD-2-Clause
+     */
+    /*jslint node: true, indent: 4 */
+    var fs = require("fs"),
+        url = require("url"),
         http = require("http"),
         https = require("https");
 
@@ -198,3 +208,93 @@ Implementation might look something like...
         }
     };
 ```
+
+So we have a nice module for assembling concatenated content. What we are missing
+is a simple wrapper to make a command line version.  For that I'll creeate _catfiles-cli.js_
+and add the _bin_ block in _package.json_.
+
+
+[First we load our module](cli.js)
+```JavaScript
+    /**
+     * catfiles-cli.js - An example NodeJS command line wrapper for catfile.js module.
+     * @author R. S. Doiel, <rsdoiel@gmail.com>
+     * copyright (c) 2013 all rights reserved
+     * Released under the BSD 2-clause license. See: http://opensource.org/licenses/BSD-2-Clause
+     */
+    /*jslint node: true, indent: 4 */
+    var cat = require("./catfiles").cat,
+        filenames;
+
+```
+
+
+[Now get a list of files or display help](cli.js)
+```JavaScript
+    // get file list
+    filenames = process.argv.slice(2);
+    if (filenames.length === 0) {
+        console.log("USAGE: catfiles FILENAME1 FILENAME2 ...");
+        console.log("Display the contents of the files one after another.");
+        process.exit(1);
+    }
+```
+
+[Finally we use our filelist and catfiles cat method](cli.js)
+```JavaScript
+    cat(filenames, function (err, buf) {
+        if (err) {
+            console.error(err);
+            process.exit(1);
+        }
+        console.log(buf.toString());
+    });
+```
+
+Node's npm uses a _package.json_ file to control installation.
+
+[package.json](package.json)
+```JavaScript
+    {
+      "name": "catfiles-js",
+      "version": "0.0.0",
+      "description": "Instructional example to concatenating files in a simple NodeJS app.",
+      "main": "catfiles.js",
+      "bin": {
+          "catfiles": "./cli.js"
+      },
+      "engines": {
+          "node": "0.10.x",
+          "npm": "1.2.x"
+      },
+      "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "devDependencies": {
+        "mweave": "0.0.x"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/rsdoiel/catfiles-js.git"
+      },
+      "keywords": [
+        "demo",
+        "javascript"
+      ],
+      "author": "R. S. Doiel, <rsdoiel@gmail.com>",
+      "license": "BSD",
+      "readmeFilename": "README.md",
+      "gitHead": "7f8f9fccfe09aa782f76b547f102176010692850"
+    }
+```
+
+# Installation
+
+To install catfiles run the following _npm_ command--
+
+``Shell
+    sudo npm -g install catfiles
+``
+
+Now you should be able to use catfiles to output combined files.
+

@@ -1,4 +1,12 @@
-var url = require("url"),
+/**
+ * catfiles.js - An example NodeJS program for concatinating files.
+ * @author R. S. Doiel, <rsdoiel@gmail.com>
+ * copyright (c) 2013 all rights reserved
+ * Released under the BSD 2-clause license. See: http://opensource.org/licenses/BSD-2-Clause
+ */
+/*jslint node: true, indent: 4 */
+var fs = require("fs"),
+    url = require("url"),
     http = require("http"),
     https = require("https");
 

@@ -3,11 +3,18 @@
   "version": "0.0.0",
   "description": "Instructional example to concatenating files in a simple NodeJS app.",
   "main": "catfiles.js",
+  "bin": {
+      "catfiles": "./cli.js"
+  },
+  "engines": {
+      "node": "0.10.x",
+      "npm": "1.2.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-      "mweave": "0.0.x"
+    "mweave": "0.0.x"
   },
   "repository": {
     "type": "git",
