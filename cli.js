@@ -20,5 +20,6 @@ cat(filenames, function (err, buf) {
         console.error(err);
         process.exit(1);
     }
-    console.log(buf);
+    process.stdout.write(buf);
+    console.log("DEBUG buf type", typeof buf);
 });

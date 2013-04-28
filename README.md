@@ -94,7 +94,7 @@ Implementation might look something like...
 
                 output[output_index] = "";
                 res.on("data", function (chunk) {
-                    output[output_index] += chunk;
+                    output[output_index] = output[output_index] + chunk.toString();
                 }).on("end", function () {
                     processed += 1;
 
@@ -183,9 +183,17 @@ Now let us put the pieces together and create a NodeJS/npm installable program.
             ht.get(href, function (res) {
                 var i = 0, total_size = 0;
 
-                output[output_index] = "";
-                res.on("data", function (chunk) {
-                    output[output_index] += chunk;
+                res.on("data", function (buf) {
+                    var total_size = 0;
+                    if (output[output_index] === undefined) {
+                        output[output_index] = buf;
+                    } else {
+                        total_size = output[output_index].length +
+                            buf.length;
+                        output[output_index] = Buffer.concat([
+                            output[output_index],
+                            buf], total_size);
+                    }
                 }).on("end", function () {
                     processed += 1;
                     if (processed === count) {
@@ -219,7 +227,7 @@ Now let us put the pieces together and create a NodeJS/npm installable program.
 ```
 
 So we have a nice module for assembling concatenated content. What we are missing
-is a simple wrapper to make a command line version.  For that I'll creeate _catfiles-cli.js_
+is a simple wrapper to make a command line version.  For that I'll creeate _cli.js_
 and add the _bin_ block in _package.json_.
 
 
@@ -256,7 +264,7 @@ and add the _bin_ block in _package.json_.
             console.error(err);
             process.exit(1);
         }
-        console.log(buf);
+        process.stdout.write(buf);
     });
 ```
 

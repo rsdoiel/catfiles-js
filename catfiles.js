@@ -51,9 +51,17 @@ exports.cat = function (urls, callback) {
         ht.get(href, function (res) {
             var i = 0, total_size = 0;
 
-            output[output_index] = "";
-            res.on("data", function (chunk) {
-                output[output_index] += chunk;
+            res.on("data", function (buf) {
+                var total_size = 0;
+                if (output[output_index] === undefined) {
+                    output[output_index] = buf;
+                } else {
+                    total_size = output[output_index].length +
+                        buf.length;
+                    output[output_index] = Buffer.concat([
+                        output[output_index],
+                        buf], total_size);
+                }
             }).on("end", function () {
                 processed += 1;
                 if (processed === count) {
