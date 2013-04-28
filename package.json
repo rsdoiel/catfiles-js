@@ -1,0 +1,24 @@
+{
+  "name": "catfiles-js",
+  "version": "0.0.0",
+  "description": "Instructional example to concatenating files in a simple NodeJS app.",
+  "main": "catfiles.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+      "mweave": "0.0.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rsdoiel/catfiles-js.git"
+  },
+  "keywords": [
+    "demo",
+    "javascript"
+  ],
+  "author": "R. S. Doiel, <rsdoiel@gmail.com>",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "7f8f9fccfe09aa782f76b547f102176010692850"
+}
