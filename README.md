@@ -92,17 +92,22 @@ Implementation might look something like...
             ht.get(href, function (res) {
                 var i = 0, total_size = 0;
 
-                output[output_index] = buf;
-                processed += 1;
-                if (processed === count) {
-                    // Get the length of the concatenated buffer you'll need
-                    for (i = 0; i < output.length; i += 1) {
-                        total_size += output[i].length;
+                output[output_index] = "";
+                res.on("data", function (chunk) {
+                    output[output_index] += chunk;
+                }).on("end", function () {
+                    processed += 1;
+
+                    if (processed === count) {
+                        // Get the length of the concatenated buffer you'll need
+                        for (i = 0; i < output.length; i += 1) {
+                            total_size += output[i].length;
+                        }
+                        // then pass new Buffer.concat(list, total_size);
+                        // to the callback
+                        callback(null, new Buffer.concat(output, total_size));
                     }
-                    // then pass new Buffer.concat(list, total_size);
-                    // to the callback
-                    callback(null, new Buffer.concat(output, total_size));
-                }
+                });
             }).on("error", function (err) {
                 var error_msg;
                 if (err) {
@@ -178,17 +183,21 @@ Now let us put the pieces together and create a NodeJS/npm installable program.
             ht.get(href, function (res) {
                 var i = 0, total_size = 0;
 
-                output[output_index] = buf;
-                processed += 1;
-                if (processed === count) {
-                    // Get the length of the concatenated buffer you'll need
-                    for (i = 0; i < output.length; i += 1) {
-                        total_size += output[i].length;
+                output[output_index] = "";
+                res.on("data", function (chunk) {
+                    output[output_index] += chunk;
+                }).on("end", function () {
+                    processed += 1;
+                    if (processed === count) {
+                        // Get the length of the concatenated buffer you'll need
+                        for (i = 0; i < output.length; i += 1) {
+                            total_size += output[i].length;
+                        }
+                        // then pass new Buffer.concat(list, total_size);
+                        // to the callback
+                        callback(null, new Buffer.concat(output, total_size));
                     }
-                    // then pass new Buffer.concat(list, total_size);
-                    // to the callback
-                    callback(null, new Buffer.concat(output, total_size));
-                }
+                });
             }).on("error", function (err) {
                 var error_msg;
                 if (err) {
@@ -247,7 +256,7 @@ and add the _bin_ block in _package.json_.
             console.error(err);
             process.exit(1);
         }
-        console.log(buf.toString());
+        console.log(buf);
     });
 ```
 

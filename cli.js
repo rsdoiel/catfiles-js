@@ -20,5 +20,5 @@ cat(filenames, function (err, buf) {
         console.error(err);
         process.exit(1);
     }
-    console.log(buf.toString());
+    console.log(buf);
 });
