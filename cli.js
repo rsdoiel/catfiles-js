@@ -21,5 +21,4 @@ cat(filenames, function (err, buf) {
         process.exit(1);
     }
     process.stdout.write(buf);
-    console.log("DEBUG buf type", typeof buf);
 });

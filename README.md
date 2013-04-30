@@ -285,18 +285,18 @@ Node's npm uses a _package.json_ file to control installation.
           "npm": "1.2.x"
       },
       "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+          "test": "echo \"Error: no test specified\" && exit 1"
       },
-      "devDependencies": {
-        "mweave": "0.0.x"
+      "optionalDependencies": {
+          "mweave": "0.0.x"
       },
       "repository": {
-        "type": "git",
-        "url": "git://github.com/rsdoiel/catfiles-js.git"
+          "type": "git",
+          "url": "git://github.com/rsdoiel/catfiles-js.git"
       },
       "keywords": [
-        "demo",
-        "javascript"
+          "demo",
+          "javascript"
       ],
       "author": "R. S. Doiel, <rsdoiel@gmail.com>",
       "license": "BSD",
