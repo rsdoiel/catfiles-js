@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * catfiles-cli.js - An example NodeJS command line wrapper for catfile.js module.
  * @author R. S. Doiel, <rsdoiel@gmail.com>

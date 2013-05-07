@@ -233,6 +233,7 @@ and add the _bin_ block in _package.json_.
 
 [First we load our module](cli.js)
 ```JavaScript
+    #!/usr/bin/env node
     /**
      * catfiles-cli.js - An example NodeJS command line wrapper for catfile.js module.
      * @author R. S. Doiel, <rsdoiel@gmail.com>
